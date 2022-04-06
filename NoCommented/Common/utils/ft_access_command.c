@@ -5,16 +5,21 @@ char	*ft_access_command(char **env_path, char *cmd)
 	ssize_t	i;
 	int		j;
 	char	*dst;
+	char	*dst2;
 
 	i = -1;
 	while (env_path[++i])
 	{
-		j = access(ft_strjoin(ft_strjoin(env_path[i], "/"), cmd), F_OK);
+		dst = ft_strjoin(ft_strjoin(env_path[i], "/", 0), cmd, 1);
+		j = access(dst, F_OK);
 		if (j == 0)
 		{
-			dst = ft_strndup(ft_strjoin(ft_strjoin(env_path[i], "/"), cmd), ft_strlen(ft_strjoin(ft_strjoin(env_path[i], "/"), cmd)));
-			return(dst);
+			dst2 = ft_strndup(dst, ft_strlen(dst));
+			free(dst);
+			return(dst2);
 		}
+		free(dst);
 	}
+
 	return (NULL);
 }

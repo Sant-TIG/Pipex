@@ -33,6 +33,14 @@ typedef struct s_holder
 
 void	ft_check_files(t_fds *fds, char **argv, size_t in_pos, size_t out_pos);
 
+/* FREE UTILS */
+
+void	ft_free_3d_str(char ***str);
+void	ft_free_2d_str(char **str);
+void	ft_general_free(t_holder *holder);
+
+
+
 /* STRINGS FUNCTIONS */
 
 char	**ft_split(const char *str, char c);
@@ -48,7 +56,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 void	ft_get_commands(t_utils *utils, char **argv, size_t start, size_t len);
 char	*ft_access_command(char **env_path, char *cmd);
-void	ft_get_commands_path(t_utils *utils, char **envp, int len);
+void	ft_get_commands_path(t_holder *holder, char **envp, int len);
 
 char	*get_next_line(int fd);
 size_t	ft_check_char(const char *str, int c);

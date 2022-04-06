@@ -5,6 +5,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_fds
 {
@@ -15,31 +17,46 @@ typedef struct s_fds
 
 typedef	struct s_utils
 {
-	char	**env_path;
 	char	***cmds;
 	char	**cmd_path;
 
 }	t_utils;
 
+typedef struct s_holder
+{
+	t_fds	*fds;
+	t_utils	*utils;
+}	t_holder;
+
 /* CHECK FUNCTIONS */
 
 void	ft_check_files(t_fds *fds, char **argv, size_t in_pos, size_t out_pos);
 
+/* FREE UTILS */
+
+void	ft_free_3d_str(char ***str);
+void	ft_free_2d_str(char **str);
+void	ft_general_free(t_holder *holder);
+
 /* STRINGS FUNCTIONS */
 
 char	**ft_split(const char *str, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, char const *s2, int n);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*ft_strndup(const char *str, size_t len);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char  *str, unsigned int start, size_t len);
 
 /* UTILS FUNCTIONS */
 
 void	ft_get_commands(t_utils *utils, char **argv, size_t start, size_t len);
 char	*ft_access_command(char **env_path, char *cmd);
-void	ft_get_commands_path(t_utils *utils, char **envp, int len);
+void	ft_get_commands_path(t_holder *holder, char **envp, int len);
+
+char	*get_next_line(int fd);
+size_t	ft_check_char(const char *str, int c);
+size_t	ft_get_char_len(const char *str, int c);
 
 #endif
