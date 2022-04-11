@@ -13,6 +13,10 @@
 #include "../incs/pipex.h"
 
 /*
+  TYPE
+  ****
+  Main function from pipex program.
+
   PARAMETERS
   **********
   holder       --> the structure that contains the data structures of the
@@ -63,7 +67,7 @@ static int	ft_check_files(t_holder *holder, char *input_file, char *output_file)
   the program in one direction or another.
 
   If the number of arguments is other than five, it frees the memory of the
-  data structures and exits the program. If is equal to five it will proceed
+  data structures and exits the program. If it is equal to five it will proceed
   according the input and output files.
 
   If the input file doesn't exist, call the function ft_treat_one_cmd() which
@@ -88,7 +92,6 @@ int	main(int argc, char **argv, char **envp)
 		if (!ft_check_files(&holder, argv[1],  argv[argc - 1]))
 			ft_treat_one_cmd(&holder, argc, argv, envp);
 		ft_treat_multiple_cmds(&holder, argc, argv, envp);
-		return (0);
 	}
 	ft_general_free(&holder);
 	write(1, "Invalid arguments.\n", 19);

@@ -7,24 +7,23 @@
 
   PARAMETERS
   **********
-  utils   --> the structure that contains the list of commands and their 
-              system paths.
-  argv    --> two-dimensional array that contains the arguments passed when
-              executing the program.
-  start   --> the position in the array where the first command is stored.
-  cmd_nbr --> the number of commands passed when executing the program.
+  holder  --> the structure that contains the data structures of the program.
+  argc    --> the number of arguments passed when executing the program.
+  argv    --> the arguments passed when executing the program.
+  envp    --> the environment variables.
 
   DESCRIPTION
   ***********
-  The ft_get_commands() function stores in a three-dimensional array each of
-  the commands, along with their arguments, passed when excecuting the program.
-
-  Each of the commands is stored in a two-dimensional array, so the command and
-  its arguments are separated into different strings within the two-dimensional
-  array.
+  The ft_treat_one_cmd() function get only the second command passed, and only
+  checks its system path. If the command is valid, it proceeds to its execution.
 
   RETURN VALUE
   ************
+  - If the the second command is valid, the function will process the command
+    and exits the program.
+  - If the command is not valid or if any error occurs during its treatment and
+    execution, the function sends the correspondind error message and closes
+    the program.
 
 */
 

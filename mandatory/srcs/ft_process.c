@@ -28,16 +28,16 @@
 
   DESCRIPTION
   ***********
-  The ft_get_commands() function stores in a three-dimensional array each of
-  the commands, along with their arguments, passed when excecuting the program.
-
-  Each of the commands is stored in a two-dimensional array, so the command and
-  its arguments are separated into different strings within the two-dimensional
-  array.
+  The ft_process() function is responsible for creating a pipe and a process
+  for each command. By this way, the child process executes the command and
+  redirects its output to the writing end of the pipe. Then the parent
+  process redirects the content of the pipe to the standard input so that it
+  can be used by the next command.
 
   RETURN VALUE
   ************
-
+  - If no error occurs, run the command.
+  - If not, send the corresponding message error and exits the process.
 */
 
 void	ft_process(t_holder *holder, char **envp, size_t i)

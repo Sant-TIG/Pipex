@@ -19,12 +19,9 @@
 
   PARAMETERS
   **********
-  utils   --> the structure that contains the list of commands and their 
-              system paths.
-  argv    --> two-dimensional array that contains the arguments passed when
-              executing the program.
-  start   --> the position in the array where the first command is stored.
-  cmd_nbr --> the number of commands passed when executing the program.
+  holder  --> the structure that contains the data structures of the program.
+  envp    --> the environment variables.
+  cmd_pos --> the position of the command in the three dimensional array.
 
   DESCRIPTION
   ***********
@@ -40,7 +37,7 @@
 
 */
 
-void	ft_process_final(t_holder *holder, char **envp, int i)
+void	ft_process_final(t_holder *holder, char **envp, int cmd_pos)
 {
 	pid_t	pid;
 
@@ -49,7 +46,7 @@ void	ft_process_final(t_holder *holder, char **envp, int i)
 	{
 		ft_dup2(holder->fds->outfile_fd, STDOUT_FILENO, holder);
 		ft_close(holder->fds->outfile_fd, holder);
-		ft_execve(holder, envp, i);
+		ft_execve(holder, envp, cmd_pos);
 	}
 	else
 		waitpid(pid, NULL, 0);
